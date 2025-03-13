@@ -1,0 +1,93 @@
+<div class="pokemon-info" *ngIf="pokemon">
+  <h3>Editar {{ pokemon.name }}</h3>
+
+  <form [formGroup]="pokemonForm" (ngSubmit)="saveChanges()">
+    <!-- Nombre (no editable) -->
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" formControlName="name" readonly />
+    </div>
+
+    <!-- Habilidad -->
+    <div class="form-group">
+      <label>Habilidad</label>
+      <select formControlName="ability">
+        <option
+          *ngFor="let ability of pokemon.abilities"
+          [value]="ability.ability.name"
+        >
+          {{ ability.ability.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Movimientos -->
+    <div class="form-group">
+      <label>Movimientos</label>
+      <div formArrayName="moves">
+        <div *ngFor="let move of moves.controls; let i = index">
+          <div [formGroupName]="i">
+            <input
+              type="text"
+              formControlName="moveName"
+              placeholder="Movimiento {{ i + 1 }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="stats-container">
+      <div formGroupName="evs">
+        <div
+          *ngFor="let stat of ['hp', 'attack', 'defense', 'specialAttack', 'specialDefense', 'speed']; let i = index"
+        >
+          <div class="stat-row">
+            <!-- Nombre de la estadística -->
+            <div class="stat-name">{{ stat }}</div>
+
+            <!-- Valor base -->
+            <div class="stat-base">{{ pokemon.stats[i] ? pokemon.stats[i].base_stat : 0 }}</div>
+
+            <!-- Diagrama (barra de progreso) -->
+            <div class="stat-diagram">
+              <div class="stat-bar" [style.width.px]="getTotalStat(stat)"></div>
+            </div>
+
+            <!-- Input para EVs -->
+            <div class="stat-evs">
+              <input type="number" [formControlName]="stat" min="0" max="252" />
+            </div>
+
+            <!-- Barra para EVs (control deslizante) -->
+            <div class="stat-evs-slider">
+              <input type="range" [formControlName]="stat" min="0" max="252" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="ivs">
+        <div
+          *ngFor="let stat of ['hp', 'attack', 'defense', 'specialAttack', 'specialDefense', 'speed']; let i = index"
+        >
+          <div class="stat-row">
+            <!-- Input para IVs -->
+            <div class="stat-ivs">
+              <input type="number" [formControlName]="stat" min="0" max="31" />
+            </div>
+
+            <!-- Valor total -->
+            <div class="stat-total">{{ getTotalStat(stat) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón para guardar cambios -->
+    <button type="submit" [disabled]="pokemonForm.invalid">
+      Guardar cambios
+    </button>
+  </form>
+</div>

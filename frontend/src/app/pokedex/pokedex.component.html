@@ -1,0 +1,29 @@
+<header>
+  <div id="tituloContainer">
+    <img src="IMG/pokeball-pokemon-svgrepo-com.svg" />
+    <h1>Pokédex</h1>
+    <img src="IMG/pokeball-pokemon-svgrepo-com.svg" />
+  </div>
+  <a href="">volver a Home</a>
+</header>
+
+
+<main id="container">
+  <app-detalle-pokemon
+    [pokemon]="pokemonSeleccionado"
+    [abierto]="detalle"
+    (clicked)="cambiarEstadoDetalle()"
+    [ngClass]="{ abierto: detalle }"
+  ></app-detalle-pokemon>
+
+  <app-foto-pokemon [pokemon]="pokemonSeleccionado"></app-foto-pokemon>
+
+  <div id="tarjetasContainer" #tarjetas (scroll)="onScroll($event)">
+    <app-tarjeta-pokemon
+      *ngFor="let pokemon of listaPokemon"
+      [data]="pokemon"
+      [seleccionado]="pokemon.name === pokemonSeleccionado?.name"
+      (clickado)="tarjetaClickada($event)"
+    ></app-tarjeta-pokemon>
+  </div>
+</main>

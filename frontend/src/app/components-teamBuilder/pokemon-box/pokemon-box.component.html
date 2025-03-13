@@ -1,0 +1,86 @@
+<div class="container">
+  <div *ngIf="pokemon" class="pokemon-box">
+    <!-- Imagen del Pokémon -->
+    <div class="pokemon-img-container">
+      <img [src]="getImageUrl()" alt="Pokemon Sprite" class="pokemon-img" />
+      <!-- Nombre del Pokémon -->
+      <h2 class="pokemon-name">{{ pokemon.name }}</h2>
+    </div>
+
+    <div class="pokemon-details">
+      <!-- Detalles: Nivel, Item, Habilidad -->
+      <div class="detail-row">
+        <div class="detail-item">
+          <strong>Level:</strong>
+          <span>{{ pokemon.level }}</span>
+        </div>
+        <!-- Mostrar los tipos del Pokémon -->
+        <div class="detail-item">
+          <strong>Type:</strong>
+          <span
+            *ngFor="let tipo of pokemon?.types"
+            class="tipo"
+            [ngClass]="'tipo-' + tipo"
+          >
+            {{ tipo }}
+          </span>
+        </div>
+        <div class="detail-item" (click)="editResource('item')">
+          <strong>Item:</strong>
+          <span>{{ pokemon?.item || "None" }}</span>
+        </div>
+        <div class="detail-item" (click)="editResource('ability')">
+          <strong>Ability:</strong>
+          <span>{{ pokemon.ability }}</span>
+        </div>
+      </div>
+
+      <!-- Movimientos -->
+      <div class="pokemon-moves">
+        <h3>Moves:</h3>
+        <span
+          *ngFor="let move of pokemon.moves; let i = index"
+          (click)="editMove(i)"
+          [ngClass]="getMoveTypeClass(i)"
+        >
+          {{ move || "" }}
+        </span>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="pokemon-stats">
+        <h3>
+          Stats: Nature:
+          <span>{{ pokemon?.nature || "Desconocida" }}</span>
+        </h3>
+
+        <div class="stat" *ngFor="let stat of statList">
+          <strong>{{ stat.label }}:</strong>
+          <p
+            class="stat-bar"
+            [ngStyle]="{
+              width: (getStat(stat.key) || 0) + 'px',
+              'background-color': getStatColor(getStat(stat.key) || 0)
+            }"
+          ></p>
+          <span>{{ getStat(stat.key) }}</span>
+        </div>
+
+        <div class="total-stat">
+          <strong>Total:</strong> <span>{{ getTotalStats() }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+
+<!-- Componente de lista de recursos para editar el Pokémon -->
+<app-list-resources
+  [pokemon]="pokemon"
+  [resourceType]="selectedField || ''"
+  [pokemonName]="pokemon?.name ?? ''"
+  [pokemonMoves]="pokemon?.moves ?? []"
+  (resourceSelected)="updatePokemonValue($event)"
+>
+</app-list-resources>

@@ -1,0 +1,45 @@
+<div
+  class="backdrop"
+  [ngClass]="{ escondido: !abierto }"
+  (click)="clicked.emit()"
+></div>
+
+<div id="container">
+  <div id="datos">
+    <div class="area">
+      <app-tarjeta-pokemon [fullData]="pokemon" [seleccionado]="true" />
+    </div>
+
+    <div class="area">
+      <p>
+        <span class="etiqueta"> Tipo </span>
+        <span
+          class="tipo"
+          *ngFor="let tipo of pokemon?.types"
+          [ngClass]="'tipo-' + tipo.type.name"
+        >
+          {{ tipo.type.name }}
+        </span>
+      </p>
+      <p><span class="etiqueta"> Altura </span>{{ alturaCm }} cm</p>
+<p><span class="etiqueta"> Peso </span> {{ pesoKg | number:'1.2-2' }} kg</p>
+
+    </div>
+
+    <div class="area">
+      <div id="descripcionContainer">
+        <div></div>
+        <p>{{ descripcion }}</p>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="cambiarEstadoDetalle()">
+    <img
+      src="IMG/icons8-flecha-derecha-90.png"
+      alt=" "
+      [ngClass]="{ girar: abierto }"
+    />
+  </button>
+</div>

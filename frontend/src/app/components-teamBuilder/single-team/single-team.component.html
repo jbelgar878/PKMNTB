@@ -1,0 +1,117 @@
+<div
+  class="container"
+  *ngIf="team"
+  appClickOutside
+  (clickOutside)="deselectTeam()"
+>
+  <h2 class="team-header">{{ team.name }}
+    <button (click)="exportTeamToShowdown()" class="export-button">Exportar a Showdown</button>
+
+  </h2>
+
+  <div class="team-container">
+    <div
+      class="pokemon"
+      *ngFor="let pokemon of team.pokemons; let i = index"
+      (click)="selectPokemonToEdit(pokemon)"
+    >
+      <img [src]="pokemon.imageUrl" alt="{{ pokemon.name }}" />
+      <p>{{ pokemon.name }}</p>
+      <button class="delete-pokemon" (click)="removePokemon($event, i)">
+        −
+      </button>
+    </div>
+
+    <div
+      class="add-pokemon"
+      *ngIf="team.pokemons.length < 6"
+      (click)="openAddPokemonModal()"
+    >
+      <span>+</span>
+    </div>
+  </div>
+
+  <app-pokemon-box
+    *ngIf="isPokemonBoxVisible && selectedPokemonToEdit"
+    [pokemon]="selectedPokemonToEdit"
+    (pokemonUpdated)="onPokemonUpdated($event)"
+  ></app-pokemon-box>
+
+  <div class="modal" *ngIf="showAddPokemonModal">
+    <div class="modal-content">
+      <h3>Añadir Pokémon</h3>
+      <div *ngIf="selectedPokemon">
+        <p>Seleccionado: {{ selectedPokemon }}</p>
+      </div>
+
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="filterPokemonList()"
+        placeholder="Buscar Pokémon"
+      />
+      <div class="pokemon-list-container" [class.selected]="isTableSelected">
+        <table class="pokemon-details-table">
+          <thead>
+            <tr>
+              <th>IMAGEN</th>
+              <th>NOMBRE</th>
+              <th>TIPOS</th>
+              <th>HABILIDADES</th>
+              <th>HP</th>
+              <th>Atk</th>
+              <th>Def</th>
+              <th>SpA</th>
+              <th>SpD</th>
+              <th>Spe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let pokemon of filteredPokemonList"
+              (dblclick)="addPokemonToTeam(pokemon.name)"
+              (click)="selectedPokemon = pokemon.name"
+              [ngClass]="{'disabled': isPokemonInTeam(pokemon.name)}">
+              <td>
+                <img
+                  [src]="pokemon.details.sprites.front_default"
+                  alt="{{ pokemon.name }}"
+                />
+              </td>
+              <td>{{ pokemon.name.toUpperCase() }}</td>
+              <td>
+                <ul>
+                  <li
+                    *ngFor="let tipo of pokemon?.details.types"
+                    class="tipo"
+                    [ngClass]="'tipo-' + tipo.type.name.toLowerCase()"
+                  >
+                    {{ tipo.type.name.toUpperCase() }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li *ngFor="let ability of pokemon.details.abilities">
+                    {{ ability.ability.name.toUpperCase() }}
+                  </li>
+                </ul>
+              </td>
+              <td>{{ pokemon.details.stats?.[0]?.base_stat }}</td>
+              <td>{{ pokemon.details.stats?.[1]?.base_stat }}</td>
+              <td>{{ pokemon.details.stats?.[2]?.base_stat }}</td>
+              <td>{{ pokemon.details.stats?.[3]?.base_stat }}</td>
+              <td>{{ pokemon.details.stats?.[4]?.base_stat }}</td>
+              <td>{{ pokemon.details.stats?.[5]?.base_stat }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-buttons">
+        <button (click)="addPokemonToTeam()">Añadir</button>
+        <button (click)="showAddPokemonModal = false">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

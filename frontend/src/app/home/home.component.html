@@ -1,0 +1,16 @@
+<div class="home-container" [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }">
+  <div class="overlay">
+    <h1 class="title">¡Entrenador, bienvenido a PKMN Team Builder!</h1>
+    
+    <div class="button-container">
+      <div class="button-wrapper">
+        <button (click)="navigateTo('pokedex')">Pokédex</button>
+        <div class="tooltip"><p>Explora todos los Pokémon disponibles</p></div>
+      </div>
+      <div class="button-wrapper">
+        <button (click)="navigateTo('teambuilder')">Team Builder</button>
+        <div class="tooltip"><p>Construye tu equipo Pokémon ideal</p></div>
+      </div>
+    </div>
+  </div>
+</div>

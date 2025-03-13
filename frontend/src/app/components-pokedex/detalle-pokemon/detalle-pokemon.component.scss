@@ -1,0 +1,237 @@
+@use "./../../../assets/styles/var.scss";
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+}
+
+#datos {
+  height: 600px;
+  width: 170vh;
+  /* width: 110vh; */
+
+  background-color: #fceab8;
+  display: grid;
+  grid-template-rows: 1fr 3fr 3fr;
+
+  .area:first-child {
+    flex-grow: 1;
+    background-color: #bfc3ce; /* Azul más claro */
+    background-image: linear-gradient(
+        45deg,
+        #c3c5c4 25%,
+        transparent 25%,
+        transparent 75%,
+        #c3c5c4 75%
+      ),
+      linear-gradient(
+        -45deg,
+        #c3c5c4 25%,
+        transparent 25%,
+        transparent 75%,
+        #c3c5c4 75%
+      );
+    background-size: 20px 20px;
+  }
+
+  .area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60%;
+    padding-right: 20px;
+    height: 100%;
+    background-color: #d3ecf6;
+    font-size: larger;
+
+    span {
+      margin-right: 15px;
+    }
+
+    background-image: linear-gradient(
+        45deg,
+        #c4e8f8 25%,
+        transparent 25%,
+        transparent 75%,
+        #c4e8f8 75%
+      ),
+      linear-gradient(
+        -45deg,
+        #c4e8f8 25%,
+        transparent 25%,
+        transparent 75%,
+        #c4e8f8 75%
+      );
+    background-size: 20px 20px;
+  }
+
+  .area:last-child {
+    background: repeating-linear-gradient(
+      0deg,
+      #cce486,
+      #cce486 2px,
+      #bfd678 2px,
+      #bfd678 4px
+    );
+  }
+}
+
+#descripcionContainer {
+  background-color: #f8f7db;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  height: 70%;
+
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+
+  /* estos son los divs dentro de desc...Container */
+  div {
+    background-color: #daeac4;
+    margin-top: 10px;
+    height: 90%;
+    margin: 5px;
+    &:first-child {
+      border-radius: 0 8px 8px 0;
+    }
+
+    &:last-child {
+      border-radius: 8px 0 0 8px;
+    }
+  }
+}
+
+.etiqueta {
+  margin-bottom: 30px;
+  display: inline-block; //sin esto no puedo ponerle ancho
+  background-color: #67bcea;
+  border-radius: 5px;
+  color: var.$texto-blanco;
+  padding: 5px 20px;
+  font-size: x-large;
+  width: 120px;
+  text-align: center;
+}
+
+.tipo {
+  color: var.$texto-blanco;
+  font-size: x-large;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px;
+  text-transform: uppercase;
+  animation: brillo 1.5s infinite alternate ease-in-out;
+  transition: transform 0.3s;
+}
+
+.tipo:hover {
+  transform: scale(1.1);
+}
+
+/* animacion */
+@keyframes brillo {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.3);
+  }
+}
+
+/*cada tipo tiene su color */
+.tipo-normal {
+  background-color: #a8a77a;
+}
+.tipo-fire {
+  background-color: #ee8130;
+}
+.tipo-water {
+  background-color: #6390f0;
+}
+.tipo-electric {
+  background-color: #f7d02c;
+  color: black;
+}
+.tipo-grass {
+  background-color: #7ac74c;
+}
+.tipo-ice {
+  background-color: #96d9d6;
+  color: black;
+}
+.tipo-fighting {
+  background-color: #c22e28;
+}
+.tipo-poison {
+  background-color: #a33ea1;
+}
+.tipo-ground {
+  background-color: #e2bf65;
+  color: black;
+}
+.tipo-flying {
+  background-color: #a98ff3;
+}
+.tipo-psychic {
+  background-color: #f95587;
+}
+.tipo-bug {
+  background-color: #a6b91a;
+}
+.tipo-rock {
+  background-color: #b6a136;
+}
+.tipo-ghost {
+  background-color: #735797;
+}
+.tipo-dragon {
+  background-color: #6f35fc;
+}
+.tipo-dark {
+  background-color: #705746;
+}
+.tipo-steel {
+  background-color: #b7b7ce;
+  color: black;
+}
+.tipo-fairy {
+  background-color: #d685ad;
+}
+
+button {
+  position: relative;
+  z-index: 10;
+  background-color: #fceab8;
+  border-radius: 0 25px 25px 0;
+  border: unset;
+  cursor: pointer;
+  img {
+    height: 50px;
+
+    /* Rotación cuando 'abierto' es true */
+    &.girar {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.backdrop {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.633);
+  z-index: -1;
+  opacity: 1;
+
+  /* Clase escondido */
+  &.escondido {
+    pointer-events: none;
+    opacity: 0;
+  }
+}

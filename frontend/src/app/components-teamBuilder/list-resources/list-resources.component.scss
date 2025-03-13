@@ -1,0 +1,159 @@
+/* Variables para colores */
+$primary-color: #5b9bd5;
+$secondary-color: #f9f9f9;
+$hover-color: #444;
+$border-color: #ddd;
+$text-color: #333;
+$light-text-color: #666;
+$placeholder-color: #999;
+$background-color: #fff;
+$focus-shadow-color: rgba(91, 155, 213, 0.6);
+
+/* Estilos generales */
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: $text-color;
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.search-input {
+  padding: 15px;
+  font-size: 18px;
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid $border-color;
+  border-radius: 30px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 8px $focus-shadow-color;
+  }
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}
+
+/* Estilos de las listas */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $secondary-color;
+  border: 1px solid $border-color;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 15px;
+  }
+
+  div {
+    flex: 1;
+
+    strong {
+      font-size: 18px;
+      color: $text-color;
+    }
+
+    p {
+      font-size: 14px;
+      color: $light-text-color;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* Sección de mensaje si no hay recursos */
+.no-resources-message p {
+  font-size: 16px;
+  color: $placeholder-color;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo común para ítems, habilidades y movimientos */
+.item-info {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente */
+  justify-content: left; /* Asegura que los elementos se distribuyan bien */
+  gap: 20px;
+}
+
+.item-info strong {
+  font-size: 18px;
+  margin: 0 20px; /* Espacio entre el nombre y el efecto */
+}
+
+.item-effect {
+  font-size: 14px;
+  color: $text-color; /* Color que prefieras */
+  margin: 0; /* Elimina el margen predeterminado de <p> */
+}
+
+/* Estilos para habilidades y movimientos */
+li {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover para los elementos de la lista */
+li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+li a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+li a:hover {
+  color: $hover-color;
+}
+
+.disabled {
+  opacity: 0.5; /* Baja opacidad para los movimientos ya seleccionados */
+  pointer-events: none; /* Evita que se pueda hacer clic en ellos */
+  cursor: not-allowed; /* Cambiar el cursor para indicar que no se puede hacer clic */
+}
+
+#cuadroresources {
+  padding-bottom: 40px;
+}

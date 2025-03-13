@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.home-container {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.681); /* Capa oscura semi-transparente */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  color: #ffcc00;
+  text-shadow: 4px 4px 0px #3b4cca;
+  margin-bottom: 60px;
+  width: 70%;
+  line-height: 2.2; /* Aumenta el interlineado */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+.button-wrapper {
+  position: relative;
+}
+
+.button-container button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 3px solid #3b4cca;
+  border-radius: 10px;
+  background-color: #ffcc00;
+  color: #000;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0px #3b4cca;
+  transition: all 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #e6b800;
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -100px; /* Ajustamos para que se sitúe debajo del botón */
+  width: 200px; /* Ajustamos el tamaño del tooltip */
+  padding: 15px;
+  font-size: 17px;
+  text-align: center;
+  border-radius: 1150px; /* Borde redondeado para hacer el tooltip circular */
+  z-index: 2;
+
+  /* Fondo dividido en rojo arriba y blanco abajo */
+  background: linear-gradient(to bottom, red 50%, white 50%);
+  
+  /* Borde negro */
+  border: 3px solid #000;
+
+  /* Ocultamos inicialmente con visibilidad y opacidad */
+  visibility: hidden; /* Oculto inicialmente */
+  opacity: 0;
+  transform: translateX(-20px); /* Comienza desplazado hacia la izquierda */
+  transition: opacity 0.75s ease, transform 0.75s ease, visibility 0s 0.05s; /* Transición para animación y visibilidad */
+
+}
+
+.tooltip p {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro */
+  color: #fff;
+  padding: 8px; /* Padding para destacar el texto */
+  border-radius: 13px;
+}
+
+/* Mostrar el tooltip con desvanecimiento y movimiento */
+.button-wrapper:hover .tooltip {
+  visibility: visible; /* Hace visible el tooltip */
+  opacity: 1; /* Hace el tooltip completamente visible */
+  transform: translateX(0); /* Mueve el tooltip a su posición original (de izquierda a derecha) */
+}

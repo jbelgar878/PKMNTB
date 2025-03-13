@@ -1,0 +1,44 @@
+<header>
+  <div id="tituloContainer">
+    <img src="IMG/pokeball-pokemon-svgrepo-com.svg" />
+    <h1>Team builder</h1>
+    <img src="IMG/pokeball-pokemon-svgrepo-com.svg" />
+  </div>
+
+  <div id="div-right">
+    <a href="">volver a Home</a>
+
+    <button 
+  (click)="toggleLoginForm()" 
+  id="log" 
+  [ngStyle]="{
+    'background-color': isLoggedIn ? '#ff4d4d' : ''}">
+  {{ isLoggedIn ? 'Cerrar sesión de ' + loggedUserName : 'Login / Registro' }}
+</button>
+
+  </div>
+</header>
+
+<!-- Formulario de Login / Registro -->
+<div *ngIf="showLoginForm" id="mod">
+  <div>
+    <input type="text" [(ngModel)]="username" placeholder="Usuario" required />
+    <input
+      type="password"
+      [(ngModel)]="password"
+      placeholder="Contraseña"
+      required
+    />
+    <button (click)="login()" [disabled]="!username || !password">
+      Iniciar sesión
+    </button>
+    <button (click)="register()" [disabled]="!username || !password">
+      Registrarse
+    </button>
+  </div>
+</div>
+
+<main [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }">
+  <app-all-teams [loggedUserName]="loggedUserName"></app-all-teams>
+  <app-single-team></app-single-team>
+</main>

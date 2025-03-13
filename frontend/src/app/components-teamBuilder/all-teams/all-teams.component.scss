@@ -1,0 +1,95 @@
+#container {
+  padding: 20px;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(to bottom, #6188ff, #8ec1f0);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+.new-team {
+  display: flex;
+  gap: 10px;
+  margin: 20px;
+
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.team-container {
+  position: relative; // Necesario para posicionar el botón de borrar
+  background-color: #88daf2;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .delete-team {
+    position: absolute; // Posicionamiento absoluto respecto al contenedor .team-container
+    top: -10px; // Mover hacia arriba
+    right: -10px; // Mover hacia la derecha
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Sombra para resaltar el botón
+
+    &:hover {
+      background-color: #cc0000;
+    }
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  .team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; // Espacio entre imágenes
+
+    img {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 5px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+arbok @ Ability Shield  
+  Ability: intimidate  
+  Quirky Nature  
+  - slam  
+  - poison-sting  
+  -   
+  -   
+  
+bulbasaur @   
+  Ability: overgrow  
+  Quirky Nature  
+  -   
+  -   
+  -   
+  -   
+  

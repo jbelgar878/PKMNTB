@@ -1,0 +1,86 @@
+<div *ngIf="resources.length > 0" id="cuadroresources" class="list-resources">
+  <h3>{{ resourceType }}</h3>
+  <!-- Barra de búsqueda para Ítems -->
+  <div *ngIf="resourceType === 'item'" class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Buscar ítem..."
+      (input)="filterResources()"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Barra de búsqueda para Movimientos -->
+  <div *ngIf="resourceType === 'moves'" class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Buscar movimiento..."
+      (input)="filterResources()"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Sección de Ítems -->
+  <div *ngIf="resourceType === 'item'">
+    <ul>
+      <li
+        *ngFor="let item of filteredResources"
+        (click)="selectResource(item)"
+        [ngClass]="{ disabled: hasitem(item) }">
+        <img
+          *ngIf="getItemSprite(item)"
+          [src]="getItemSprite(item)"
+          [alt]="item.name"
+        />
+        <div class="item-info">
+          <strong>{{ item.name }}</strong>
+          <p class="item-effect">{{ getItemEffect(item) }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sección de Habilidades -->
+  <div *ngIf="resourceType === 'ability'">
+    <ul>
+      <li *ngFor="let ability of resources" (click)="selectResource(ability)">
+        <div class="item-info">
+          <strong>{{ ability.name }}</strong>
+          <p class="item-effect">
+            {{ ability.description || "Cargando descripción..." }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sección de Movimientos -->
+  <div *ngIf="resourceType === 'moves'">
+    <ul>
+      <li
+        *ngFor="let move of filteredResources"
+        (click)="selectResource(move)"
+        [ngClass]="{ disabled: hasMove(move.name) }"
+      >
+        <!-- Agregar clase 'disabled' si el movimiento ya está asignado -->
+        <div class="item-info">
+          <strong>{{ move.displayName }}</strong>
+          <p><b>Tipo:</b> {{ move.type }}</p>
+          <p><b>Categoría:</b> {{ move.category }}</p>
+          <p><b>Potencia:</b> {{ move.basePower || "N/A" }}</p>
+          <p><b>PP:</b> {{ move.pp }}</p>
+          <p>
+            <b>Efecto:</b> {{ move.description || "Cargando descripción..." }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Mensaje si no hay recursos -->
+  <div *ngIf="resources.length === 0" class="no-resources-message">
+    <p>No hay recursos disponibles para este tipo.</p>
+  </div>
+</div>

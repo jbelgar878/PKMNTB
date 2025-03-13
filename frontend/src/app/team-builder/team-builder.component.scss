@@ -1,0 +1,195 @@
+@use "./../../assets/styles/var.scss";
+:host {
+  //esto me cambia la fuente dentro del componente
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+header {
+  background: linear-gradient(
+    to right,
+    #6188ff,
+    #6188ff 70%,
+    #71a4f3 71%,
+    #71a4f3 97%,
+    #8ec0f0 100%
+  );
+
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  user-select: none;
+
+  a {
+    color: var.$texto-blanco;
+    text-decoration: none;
+    background-color: #4379cf;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    border-radius: 50px;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+
+  }
+  a:hover {
+    background-color: #30408d;
+  }
+}
+
+#tituloContainer {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #88daf2;
+  border-radius: 50px;
+  height: 50px;
+  padding: 0 5px;
+  border: solid 3px #30408d;
+  color: var.$texto-blanco;
+  img {
+    height: 40px;
+  }
+
+  h1 {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    font-size: 2.5rem;
+    -webkit-text-stroke: 2px #30607a;
+  }
+}
+
+/* Estilos para el Modal */
+#mod {
+  display: none; /* Inicialmente oculto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que el modal esté por encima del contenido */
+  padding: 20px;
+}
+
+#mod div {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#mod input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#mod button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background-color: #6188ff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#mod button:hover {
+  background-color: #5a7ed9;
+}
+
+#mod button:first-child {
+  background-color: #4379cf;
+}
+
+#mod button:first-child:hover {
+  background-color: #366bac;
+}
+
+/* Cuando el modal se muestre, se hace visible */
+#mod.display {
+  display: flex;
+}
+
+/* Estilos para el botón de Login */
+#log {
+  background-color: #4379cf;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+#log:hover {
+  background-color: #366bac;
+}
+
+#div-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#log {
+  color: var.$texto-blanco;
+  text-decoration: none;
+  background-color: #4379cf;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 30px;
+  border-radius: 50px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#log:hover {
+  background-color: #45a049;
+}
+
+h2 {
+  color: #6188ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* main------------------------------------- */
+main {
+  display: grid;
+  grid-template-columns: 25% 1fr; // All Teams 15%, Single Team el resto
+  gap: 20px; // Espacio entre columnas
+  height: 100vh;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+app-all-teams {
+  background: #8ec1f080;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+app-single-team {
+  background: #88d9f281;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-y: auto;
+}

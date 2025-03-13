@@ -1,0 +1,53 @@
+#container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate; // sin esto se me rompe el z-index es para que el indez solo tenga en cuenta el index del contenedor y no de la pag
+  &.seleccionado::before {
+    position: absolute;
+    content: "";
+    width: calc(100% + 8px);
+    height: 120%;
+    left: 0;
+    background-color: #da4443;
+    z-index: -1;
+    border-radius: 5px;
+  }
+}
+
+#flecha {
+  position: absolute;
+  height: 20px;
+  padding: 0 10px;
+}
+
+#tarjeta {
+  display: flex;
+  align-items: center;
+  background-color: #fceab8;
+  border-radius: 25px 5px 5px 25px;
+  width: 90%;
+  font-size: x-large;
+  padding-left: 5px;
+  gap: 1rem;
+  margin-left: 30px;
+  height: 50px;
+
+  &.seleccionado {
+    background-color: #f49545;
+    -webkit-box-shadow: inset 0px 0px 7px 4px #fceab8;
+    -moz-box-shadow: inset 0px 0px 7px 4px #fceab8;
+    box-shadow: inset 0px 0px 7px 4px #fceab8;
+  }
+}
+
+#circulo {
+  border-radius: 50%;
+  height: 30px;
+  aspect-ratio: 1;
+  background-color: rgba(0, 0, 0, 0.125);
+}
+
+img {
+  max-height: 45px;
+}

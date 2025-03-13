@@ -1,0 +1,392 @@
+@use "./../../../assets/styles/var.scss";
+
+.container {
+  padding: 0;
+}
+
+.team-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 20px; /* Ajuste en el espacio entre los Pokémon */
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.pokemon {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  img {
+    width: 100px;
+    height: 100px;
+    background-color: var.$texto-blanco-fondo;
+    border-radius: 12px;
+    padding: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .delete-pokemon {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #ff6f00;
+  }
+
+  p {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.add-pokemon {
+  width: 80px;
+  height: 80px;
+  background-color: var.$texto-blanco;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  span {
+    font-size: 24px;
+    color: #555;
+  }
+
+  &:hover {
+    background-color: #d0d0d0;
+  }
+}
+
+.modal-content {
+  background-color: var.$texto-blanco;
+  padding: 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.modal-buttons button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  background-color: #45a049;
+}
+
+.pokemon-list-container {
+  width: 100%;
+  max-height: 350px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.pokemon-list-container.selected {
+  background-color: #f2f2f2;
+}
+
+.pokemon-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+}
+
+.pokemon-details-table th,
+.pokemon-details-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.pokemon-details-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  position: sticky;
+  top: -20px !important;
+  z-index: 1;
+}
+
+.pokemon-details-table ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pokemon-details-table li {
+  font-size: 14px;
+  color: #555;
+}
+
+.pokemon-details-table tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Estilo para el campo de búsqueda */
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  /* Foco en el campo de búsqueda */
+  &:focus {
+    border-color: #4caf50;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    outline: none;
+  }
+
+  /* Espaciado y alineación de texto */
+  &::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+}
+
+input[type="text"]:disabled {
+  background-color: #e9e9e9;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los tipos de Pokémon */
+.tipo {
+  color: var.$texto-blanco !important;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px;
+  text-transform: uppercase;
+  animation: brillo 1.5s infinite alternate ease-in-out;
+  transition: transform 0.3s;
+}
+
+.tipo:hover {
+  transform: scale(1.1);
+}
+
+/* Animación de brillo */
+@keyframes brillo {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.3);
+  }
+}
+
+/* Estilos específicos para cada tipo de Pokémon */
+.tipo-normal {
+  background-color: #a8a77a;
+}
+.tipo-fire {
+  background-color: #ee8130;
+}
+.tipo-water {
+  background-color: #6390f0;
+}
+.tipo-electric {
+  background-color: #f7d02c;
+  color: black;
+}
+.tipo-grass {
+  background-color: #7ac74c;
+}
+.tipo-ice {
+  background-color: #96d9d6;
+  color: black;
+}
+.tipo-fighting {
+  background-color: #c22e28;
+}
+.tipo-poison {
+  background-color: #a33ea1;
+}
+.tipo-ground {
+  background-color: #e2bf65;
+  color: black;
+}
+.tipo-flying {
+  background-color: #a98ff3;
+}
+.tipo-psychic {
+  background-color: #f95587;
+}
+.tipo-bug {
+  background-color: #a6b91a;
+}
+.tipo-rock {
+  background-color: #b6a136;
+}
+.tipo-ghost {
+  background-color: #735797;
+}
+.tipo-dragon {
+  background-color: #6f35fc;
+}
+.tipo-dark {
+  background-color: #705746;
+}
+.tipo-steel {
+  background-color: #b7b7ce;
+  color: black;
+}
+.tipo-fairy {
+  background-color: #d685ad;
+}
+
+
+.disabled {
+  opacity: 0.5; /* Baja opacidad para los Pokémon ya seleccionados */
+  pointer-events: none; /* Evita que se pueda hacer clic en ellos */
+  cursor: not-allowed; /* Cambiar el cursor para indicar que no se puede hacer clic */
+}
+
+
+/* Estilos para el botón de exportar */
+.export-button {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  /* Efecto de hover */
+  &:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  /* Efecto de click */
+  &:active {
+    background-color: #388e3c;
+    transform: scale(1);
+  }
+
+  /* Efecto de focus */
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+  }
+}
+
+/* Estilo cuando el botón está deshabilitado */
+.export-button:disabled {
+  background-color: #b0e57c;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Agregar un pequeño efecto de transición */
+.export-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.export-button {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #388e3c;
+    transform: scale(1);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+  }
+
+  /* Estilo cuando el botón está deshabilitado */
+  &:disabled {
+    background-color: #b0e57c;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

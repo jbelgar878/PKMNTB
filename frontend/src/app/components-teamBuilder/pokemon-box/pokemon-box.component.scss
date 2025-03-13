@@ -1,0 +1,254 @@
+@use "./../../../assets/styles/var.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: 1em;
+}
+
+.pokemon-box {
+  display: grid;
+  grid-template-columns: 20% 80%; /* 20% para la imagen, 80% para la información */
+  background: var.$texto-blanco;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  max-width: 100%;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr; /* 1 columna en pantallas más pequeñas */
+  }
+}
+
+.pokemon-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.pokemon-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.pokemon-name {
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 15px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.pokemon-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Tres columnas dentro de la segunda sección */
+  gap: 20px;
+  width: 100%;
+  padding: 10px;
+
+  .detail-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.detail-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: #ededed;
+  min-height: 3em;
+  border-radius: 50px;
+  padding-left: 20px;
+  transition: background-color 0.3s ease; /* Solo cambiamos el fondo */
+}
+
+.detail-item strong {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #1f1f1f; /* Color del texto constante */
+}
+
+.detail-item span {
+  cursor: pointer;
+  transition: color 0.3s ease; /* El color de texto se mantiene constante */
+}
+
+.detail-item:hover {
+  background-color: #ff6f0086; /* Fondo más oscuro al pasar el cursor */
+}
+
+.detail-item:hover span {
+  color: #333; /* Mantener color de texto constante */
+}
+
+.pokemon-moves {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 15px;
+  grid-column: span 1; /* Cada columna ocupa un 1fr dentro de la grid */
+
+  span {
+    width: 90%;
+    padding: 20px;
+    background-color: #ededed;
+    border-radius: 50px;
+    transition: background-color 0.3s ease; /* Solo cambiamos el fondo */
+    cursor: pointer; /* Indica que es interactivo */
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  span:hover {
+    background-color: #ff6f0086; /* Fondo más oscuro al pasar el cursor */
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+}
+
+.pokemon-stats {
+  grid-column: span 1; /* Cada columna ocupa un 1fr dentro de la grid */
+  padding: 15px;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Crea dos columnas, una para la barra y otra para el número */
+  align-items: center; /* Alinea los elementos verticalmente */
+
+  strong {
+    width: 120px; /* Espacio fijo para el nombre de la stat */
+    padding: 9px 0;
+    font-size: 1em;
+  }
+
+  .stat-bar {
+    height: 10px;
+    width: 0; /* Inicializamos el ancho en 0 */
+    min-width: 10px; /* Evita que la barra desaparezca si el valor es bajo */
+    max-width: 200px; /* Limita el ancho máximo de la barra */
+  }
+
+  span {
+    text-align: right; /* Alinea el número a la derecha */
+    padding-left: 8px; /* Asegura que el número no quede pegado a la barra */
+    font-size: 1em;
+  }
+}
+
+.total-stat {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 12px;
+  color: #333;
+}
+
+.total-stat span {
+  color: #0074cc;
+  font-weight: 600;
+}
+
+.tipo {
+  color: var.$texto-blanco;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px;
+  text-transform: uppercase;
+  animation: brillo 1.5s infinite alternate ease-in-out;
+  transition: transform 0.3s;
+}
+
+.tipo:hover {
+  transform: scale(1.1);
+}
+
+/* animacion */
+@keyframes brillo {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.3);
+  }
+}
+
+/*cada tipo tiene su color */
+.tipo-normal {
+  background-color: #ededed !important;
+  color: black !important;
+
+}
+.tipo-fire {
+  background-color: #ee8130 !important;
+}
+.tipo-water {
+  background-color: #6390f0 !important;
+}
+.tipo-electric {
+  background-color: #f7d02c !important;
+  color: black !important;
+}
+.tipo-grass {
+  background-color: #7ac74c !important;
+}
+.tipo-ice {
+  background-color: #96d9d6 !important;
+  color: black !important;
+}
+.tipo-fighting {
+  background-color: #c22e28 !important;
+}
+.tipo-poison {
+  background-color: #a33ea1 !important;
+}
+.tipo-ground {
+  background-color: #e2bf65 !important;
+  color: black !important;
+}
+.tipo-flying {
+  background-color: #a98ff3 !important;
+}
+.tipo-psychic {
+  background-color: #f95587 !important;
+}
+.tipo-bug {
+  background-color: #a6b91a !important;
+}
+.tipo-rock {
+  background-color: #b6a136 !important;
+}
+.tipo-ghost {
+  background-color: #735797 !important;
+}
+.tipo-dragon {
+  background-color: #6f35fc !important;
+}
+.tipo-dark {
+  background-color: #705746 !important;
+}
+.tipo-steel {
+  background-color: #b7b7ce !important;
+  color: black !important;
+}
+.tipo-fairy {
+  background-color: #d685ad !important;
+}

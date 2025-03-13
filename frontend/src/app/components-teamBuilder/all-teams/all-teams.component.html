@@ -1,0 +1,38 @@
+<div id="container">
+  <h2 *ngIf="loggedUserName; else defaultTitle">
+    Estos son tus equipos, {{ loggedUserName }}
+  </h2>
+  <ng-template #defaultTitle>
+    <h2>Mis equipos</h2>
+  </ng-template>
+
+  <!-- Formulario para crear equipos -->
+  <div class="new-team">
+    <input
+      type="text"
+      [(ngModel)]="newTeamName"
+      placeholder="Nombre del equipo"
+      (keydown.enter)="addTeam()"
+    />
+    <button (click)="addTeam()">Crear equipo</button>
+  </div>
+
+  <!-- Lista de equipos -->
+  <div
+    *ngFor="let team of teams"
+    class="team-container"
+    (click)="selectTeam(team)"
+  >
+    <div class="name">{{ team.name }}</div>
+    
+    <hr />
+    <div class="team">
+      <img
+        *ngFor="let pokemon of team.pokemons"
+        [src]="pokemon.imageUrl"
+        alt="{{ pokemon.name }}"
+      />
+    </div>
+    <button class="delete-team" (click)="removeTeam(team.id)">−</button>
+  </div>
+</div>
